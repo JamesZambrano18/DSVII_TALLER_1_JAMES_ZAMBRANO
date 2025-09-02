@@ -13,6 +13,7 @@ class Biblioteca {
         foreach ($this->libros as $libro) {
             echo $libro->obtenerInformacion() . "\n";
             echo "Disponible: " . ($libro->estaDisponible() ? "Sí" : "No") . "\n\n";
+            echo "<br>";
         }
     }
 
@@ -46,17 +47,21 @@ $libro2 = new LibroDigital("Dune", "Frank Herbert", 1965, "EPUB", 3.2);
 $biblioteca->agregarLibro($libro1);
 $biblioteca->agregarLibro($libro2);
 
-echo "Listado inicial de libros:\n";
+echo "Listado inicial de libros:<br>";
 $biblioteca->listarLibros();
 
+echo "<br>";
 echo "Prestando 'El principito'...\n";
 $biblioteca->prestarLibro("El principito");
+echo "<br><br>";
 
-echo "Listado después de prestar:\n";
+echo "Listado después de prestar:\n<br>";
 $biblioteca->listarLibros();
 
+echo "<br>";
 echo "Devolviendo 'El principito'...\n";
 $biblioteca->devolverLibro("El principito");
+echo "<br><br>";
 
-echo "Listado final:\n";
+echo "Listado final:\n<br>";
 $biblioteca->listarLibros();
