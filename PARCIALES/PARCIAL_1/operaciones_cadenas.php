@@ -13,8 +13,8 @@ function capitalizar_palabras($texto)
 {
     strtolower($texto);
     $palabras = explode(" ", $texto);
-    for ($i = 0; $i < count($palabras); $i++) {
-        strtoupper(substr($palabras[$i],0,1));
+    foreach ($palabras as $palabra) {
+        strtoupper(substr($palabra,0,1) . substr($palabra,1));
     }
     return implode(" ", $palabras);
 }

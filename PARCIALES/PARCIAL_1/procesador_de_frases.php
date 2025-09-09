@@ -11,5 +11,5 @@ $frases = [
 foreach ($frases as $clave => $valor) {
     //contar_palabras_repetidas($valor);
     $frases_capitalizadas = capitalizar_palabras($valor);
-    print_r($frases_capitalizadas);
+    echo "$frases_capitalizadas\n";
 }
