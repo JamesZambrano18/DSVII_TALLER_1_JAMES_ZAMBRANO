@@ -11,7 +11,7 @@ function validarEdad($edad) {
     return is_numeric($edad) && $edad >= 18 && $edad <= 120;
 }
 
-function validarSitioWeb($sitioWeb) {
+function validarSitio_Web($sitioWeb) {
     return empty($sitioWeb) || filter_var($sitioWeb, FILTER_VALIDATE_URL);
 }
 
@@ -21,7 +21,7 @@ function validarGenero($genero) {
 }
 
 function validarIntereses($intereses) {
-    $interesesValidos = ['deportes', 'musica', 'lectura', 'Ver South Park'];
+    $interesesValidos = ['deportes', 'musica', 'lectura'];
     return !empty($intereses) && count(array_intersect($intereses, $interesesValidos)) === count($intereses);
 }
 
