@@ -1,8 +1,9 @@
 <?php
 session_start();
+$usuario = $_SESSION['usuario'];
+if(isset($usuario)) {
 
-if(isset($_SESSION['usuario'])) {
-    echo "hola ". htmlspecialchars($_SESSION['usuario']).", así se ve tu carrito";
+    echo "hola ". htmlspecialchars($usuario).", así se ve tu carrito";
 } else {
     echo "No has iniciado sesión.";
 }

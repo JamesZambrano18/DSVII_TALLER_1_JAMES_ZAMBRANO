@@ -1,14 +1,8 @@
 <?php
 session_start();
 $_SESSION['usuario'] = "Consumidor";
-
-$productos = [
-    'Lenteja' => '5.99',
-    'chuletas ahumadas' => '6.99',
-    'Coca Cola 1L' => '1.20',
-    'Queso amarillo gourmet' => '4.50',
-    'Carne de res' => '3.00'
-];
+$productos = file_get_contents('productos.json');
+$productos = json_decode($productos,true)
 
 ?>
 
@@ -30,18 +24,21 @@ $productos = [
             <th>Cantidad a añadir</th>
         </thead>
         <tbody>
-            <?php foreach ($productos as $producto => $precio): ?>
+            <?php foreach ($productos as $producto): ?>
                 <form action="agregar_al_carrito.php" method="post">
                     <tr>
-                        <td><?php echo $producto ?></td>
-                        <td><?php echo $precio ?></td>
-                        <td><input type="number" min="1" name="cantidadProducto" placeholder="1"></td>
+                        <td><?php echo $producto['nombre'] ?></td>
+                        <input type="hidden" name="nombreProducto" value="<?php echo $producto['nombre'] ?>">
+                        <td><?php echo $producto['precio'] ?></td>
+                        <input type="hidden" name="precioProducto" value="<?php echo $producto['precio'] ?>">
+                        <td><input type="number" min="1" name="cantidadProducto" required></td>
                         <td><button name="btnAñadir">Añadir al carrito</button></td>
                     </tr>
                 </form>
             <?php endforeach; ?>
         </tbody>
     </table>
+    <br/>
     <a href="ver_carrito.php">Ver mi carrito</a>
 </body>
 
