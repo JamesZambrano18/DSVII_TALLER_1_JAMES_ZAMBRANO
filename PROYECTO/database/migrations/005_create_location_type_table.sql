@@ -1,0 +1,4 @@
+CREATE TABLE IF NOT EXISTS location_type (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    location_type VARCHAR(20) NOT NULL
+);
