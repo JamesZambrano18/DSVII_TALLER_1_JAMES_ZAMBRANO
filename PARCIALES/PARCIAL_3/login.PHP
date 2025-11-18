@@ -16,11 +16,13 @@ try {
         $password = $_POST['password'];
         $usernameTrim = trim($username, " ");
         $passwordTrim = trim($password, " ");
+        $usernameSanitizado = htmlspecialchars($usernameTrim);
+        $passwordSanitizado = htmlspecialchars($passwordTrim);
 
-        if (strlen($usernameTrim) >= 3 && strlen($passwordTrim) >= 5) {
+        if (strlen($usernameSanitizado) >= 3 && strlen($passwordSanitizado) >= 5) {
             foreach ($usuarios as $usuario) {
-                if ($usernameTrim == $usuario['nombre'] && $passwordTrim = $usuario['password']) {
-                    $_SESSION['username'] = $usernameTrim;
+                if ($usernameSanitizado == $usuario['nombre'] && $passwordSanitizado = $usuario['password']) {
+                    $_SESSION['username'] = $usernameSanitizado;
                     $_SESSION['rol'] = $usuario['rol'];
                     verificarRol($_SESSION['rol']);
                 } else {
