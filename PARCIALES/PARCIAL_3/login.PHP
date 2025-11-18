@@ -2,9 +2,6 @@
 session_start();
 require_once "users.php";
 
-foreach ($usuarios as $usuario) {
-    echo "nombre: " . $usuario['nombre'] . " contraseña: " . $usuario['password'] . " rol: " . $usuario['rol'] . "</br>";
-}
 try {
     if (isset($_SESSION['username'])) {
         verificarRol($_SESSION['rol']);
