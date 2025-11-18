@@ -1,12 +1,15 @@
 <?php
 session_start();
 require "users.php";
-
-if (!isset($_SESSION['username'])) {
-    header("Location: login.php");
-    exit();
-} else {
-    $username = $_SESSION['username'];
+try {
+    if (!isset($_SESSION['username'])) {
+        header("Location: login.php");
+        exit();
+    } else {
+        $username = $_SESSION['username'];
+    }
+} catch (Exception $e) {
+    echo "Error: " . $e->getMessage();
 }
 ?>
 
@@ -30,15 +33,20 @@ if (!isset($_SESSION['username'])) {
             </th>
         </thead>
         <tbody>
-            <?php foreach ($usuarios as $usuario): ?>
-                <?php if ($username == $usuario['nombre']): ?>
-                    <?php foreach ($usuario['calificaciones'] as $nota): ?>
-                        <tr>
-                            <td><?php echo $nota ?></td>
-                        </tr>
-                    <?php endforeach ?>
-                <?php endif ?>
-            <?php endforeach ?>
+            <?php try { ?>
+                <?php foreach ($usuarios as $usuario): ?>
+                    <?php if ($username == $usuario['nombre']): ?>
+                        <?php foreach ($usuario['calificaciones'] as $nota): ?>
+                            <tr>
+                                <td><?php echo $nota ?></td>
+                            </tr>
+                        <?php endforeach ?>
+                    <?php endif ?>
+                <?php endforeach ?>
+            <?php } catch (Exception $e) {
+                echo "Error: " . $e->getMessage();
+            } ?>
+
         </tbody>
     </table>
     <button><a href="logout.php">Cerrar Sesion</a></button>
