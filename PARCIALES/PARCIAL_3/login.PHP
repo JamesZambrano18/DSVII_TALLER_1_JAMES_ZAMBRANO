@@ -13,8 +13,8 @@ if(isset($_SESSION['username'])) {
 
 if($_SERVER['REQUEST_METHOD'] == "POST"){
     $username = $_POST['username'];
-    $usernameTrim = trim($username, " ");
     $password = $_POST['password'];
+    $usernameTrim = trim($username, " ");
     $passwordTrim = trim($password, " ");
 
     if(strlen($usernameTrim) >= 3 && strlen($passwordTrim) >= 5) {
