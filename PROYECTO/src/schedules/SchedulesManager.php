@@ -14,9 +14,13 @@ class SchedulesManager {
     }
 
     // Método para crear una nueva tarea
-    public function createSchedules($schedule_code, $shift_id) {
+    public function createSchedules($schedule) {
         $stmt = $this->db->prepare("INSERT INTO schedules (schedule_code, shift_id) VALUES (?,?)");
-        return $stmt->execute([$schedule_code, $shift_id]);
+        return $stmt->execute([
+            'schedule_code' => $schedule->mail,
+            'shift_id' => $schedule->password,
+
+        ]);
     }
 
     // Método para eliminar una tarea

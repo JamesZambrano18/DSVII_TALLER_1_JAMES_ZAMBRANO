@@ -14,9 +14,12 @@ class BussesManager {
     }
 
     // Método para crear una nueva tarea
-    public function createBus($bus_code, $schedule_id) {
+    public function createBus($bus) {
         $stmt = $this->db->prepare("INSERT INTO busses (bus_code, schedule_id) VALUES (?,?)");
-        return $stmt->execute([$bus_code, $schedule_id]);
+        return $stmt->execute([
+            'bus_code' => $bus->bus_code,
+            'schedule_id' => $bus->schedule_id,
+        ]);
     }
 
     // Método para eliminar una tarea

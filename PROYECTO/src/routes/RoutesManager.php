@@ -14,9 +14,13 @@ class RoutesManager {
     }
 
     // Método para crear una nueva tarea
-    public function createRoutes($bus_id, $departure_location, $arrival_location) {
+    public function createRoutes($route) {
         $stmt = $this->db->prepare("INSERT INTO routes (bus_id, departure_location, arrival_location) VALUES (?,?,?)");
-        return $stmt->execute([$bus_id, $departure_location, $arrival_location]);
+        return $stmt->execute([
+            'bus_id' => $route->bus_id,
+            'departure_location' => $route->departure_location,
+            'arrival_location' => $route->arrival_location
+        ]);
     }
 
     // Método para eliminar una tarea

@@ -14,9 +14,13 @@ class LocationsManager {
     }
 
     // Método para crear una nueva tarea
-    public function createLocation($district, $street, $location_type) {
+    public function createLocation($locations) {
         $stmt = $this->db->prepare("INSERT INTO locations (district, street, location_type) VALUES (?,?,?)");
-        return $stmt->execute([$district, $street, $location_type]);
+        return $stmt->execute([
+            'district' => $locations->district,
+            'street' => $locations->street,
+            'location_type' => $locations->location_type
+        ]);
     }
 
     // Método para eliminar una tarea

@@ -14,9 +14,18 @@ class UsersManager {
     }
 
     // Método para crear una nueva tarea
-    public function createUser($mail, $pass, $first_name, $last_name, $phone_number, $role_id, $bus_id) {
+    public function createUser($project) {
         $stmt = $this->db->prepare("INSERT INTO users (mail, pass, first_name, last_name, phone_number, role_id, bus_id) VALUES (?,?,?,?,?,?,?)");
-        return $stmt->execute([$mail, $pass, $first_name, $last_name, $phone_number, $role_id, $bus_id]);
+        return $stmt->execute([
+            'mail' => $project->mail,
+            'pass' => $project->password,
+            'first_name' => $project->fname,
+            'last_name' => $project->lname,
+            'phone_number' => $project->phoneNumber,
+            'role_id' => $project->role,
+            'bus_id' => $project->bus,
+
+        ]);
     }
 
     // Método para eliminar una tarea
