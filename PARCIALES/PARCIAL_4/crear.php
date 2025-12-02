@@ -1,29 +1,43 @@
 <?php
-require_once "database.php";
+try {
+    require_once "database.php";
 
-if($_SERVER["REQUEST_METHOD"] == "POST"){
-    $nombre = mysqli_real_escape_string($conn, $_POST['nombre']);
-    $categoria = mysqli_real_escape_string($conn, $_POST['categoria']);
-    $precio = mysqli_real_escape_string($conn, $_POST['precio']);
-    $cantidad = mysqli_real_escape_string($conn, $_POST['cantidad']);
-    
-    $sql = "INSERT INTO productos (nombre, categoria, precio, cantidad) VALUES (?,?,?,?);";
-    
-    if($stmt = mysqli_prepare($conn, $sql)){
-        mysqli_stmt_bind_param($stmt, "ssdi", $nombre, $categoria,
-    $precio,$cantidad);
-        
-        if(mysqli_stmt_execute($stmt)){
-            echo "Producto añadido exitosamente.";
-        } else{
-            echo "ERROR: No se pudo ejecutar $sql. " . mysqli_error($conn);
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $nombre = mysqli_real_escape_string($conn, $_POST['nombre']);
+        $categoria = mysqli_real_escape_string($conn, $_POST['categoria']);
+        $precio = mysqli_real_escape_string($conn, $_POST['precio']);
+        $cantidad = mysqli_real_escape_string($conn, $_POST['cantidad']);
+
+        $sql = "INSERT INTO productos (nombre, categoria, precio, cantidad) VALUES (?,?,?,?);";
+
+        if ($precio <= 0 || $cantidad < 0) {
+            echo "ERROR: Ingresaste datos no validos";
+        } else {
+            if ($stmt = mysqli_prepare($conn, $sql)) {
+                mysqli_stmt_bind_param(
+                    $stmt,
+                    "ssdi",
+                    $nombre,
+                    $categoria,
+                    $precio,
+                    $cantidad
+                );
+
+                if (mysqli_stmt_execute($stmt)) {
+                    echo "Producto añadido exitosamente.";
+                } else {
+                    echo "ERROR: No se pudo ejecutar $sql. " . mysqli_error($conn);
+                }
+            }
+
+            mysqli_stmt_close($stmt);
         }
     }
-    
-    mysqli_stmt_close($stmt);
-}
 
-mysqli_close($conn);
+    mysqli_close($conn);
+} catch (Exception $e) {
+    echo "Error: " . $e->getMessage();
+}
 ?>
 
 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
@@ -34,4 +48,4 @@ mysqli_close($conn);
     <div><label>Cantidad: </label><input type="number" name="cantidad" required min="0"></div>
     <input type="submit" value="Añadir Producto">
 </form>
-<a href = "index.php">Cancelar</a>
+<a href="index.php">Cancelar</a>
