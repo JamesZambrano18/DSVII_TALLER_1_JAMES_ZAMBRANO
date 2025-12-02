@@ -13,7 +13,7 @@ $row = mysqli_fetch_array($result);
     <div><label>Categoria: </label><input type="text" name="categoria" value="<?= $row['categoria'];?>" required></div>
     <!-- cambiar a decimal -->
     <div><label>Precio: </label><input type="text" name="precio" value="<?= $row['precio'];?>" required></div>
-    <div><label>Cantidad: </label><input type="number" name="cantidad" value="<?= $row['cantidad'];?>" required></div>
+    <div><label>Cantidad: </label><input type="number" name="cantidad" value="<?= $row['cantidad'];?>" required min="0"></div>
     <input type="submit" value="Actualizar Producto">
 </form>
 <a href="index.php">Cancelar</a>

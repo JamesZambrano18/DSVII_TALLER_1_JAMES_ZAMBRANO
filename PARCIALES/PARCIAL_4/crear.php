@@ -31,7 +31,7 @@ mysqli_close($conn);
     <div><label>Categoria: </label><input type="text" name="categoria" required></div>
     <!-- cambiar a decimal -->
     <div><label>Precio: </label><input type="text" name="precio" required></div>
-    <div><label>Cantidad: </label><input type="number" name="cantidad" required></div>
+    <div><label>Cantidad: </label><input type="number" name="cantidad" required min="0"></div>
     <input type="submit" value="Añadir Producto">
 </form>
 <a href = "index.php">Cancelar</a>
