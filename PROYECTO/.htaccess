@@ -19,13 +19,14 @@
     # ---------------------------------------------------------
     # 3) Rutas bonitas genéricas
     # ---------------------------------------------------------
-
-    # /projects  -> src/projects/index.php?action=list
-    RewriteRule ^([a-zA-Z0-9_-]+)/?$ src/$1/index.php?action=list [L,QSA]
+    
+    # /projects/edit/123 -> src/projects/index.php?action=edit&id=123
+    RewriteRule ^([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/([0-9]+)/?$ src/$1/index.php?action=$2&id=$3 [L,QSA]
 
     # /projects/create -> src/projects/index.php?action=create
     RewriteRule ^([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/?$ src/$1/index.php?action=$2 [L,QSA]
 
-    # /projects/edit/123 -> src/projects/index.php?action=edit&id=123
-    RewriteRule ^([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/([0-9]+)/?$ src/$1/index.php?action=$2&id=$3 [L,QSA]
+    # /projects  -> src/projects/index.php?action=list
+    RewriteRule ^([a-zA-Z0-9_-]+)/?$ src/$1/index.php?action=list [L,QSA]
+
 </IfModule>

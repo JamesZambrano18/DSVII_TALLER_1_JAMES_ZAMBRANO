@@ -1,42 +1,65 @@
 <?php
-class UsersManager {
+class UsersManager
+{
     private $db;
 
-    public function __construct() {
+    public function __construct()
+    {
         // Obtenemos la conexión a la base de datos
         $this->db = Database::getInstance()->getConnection();
     }
 
     // Método para obtener todas las tareas
-    public function getAllUsers() {
+    public function getAllUsers()
+    {
         $stmt = $this->db->query("SELECT * FROM users");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     // Método para crear una nueva tarea
-    public function createUser($project) {
+    public function createUser($user)
+    {
         $stmt = $this->db->prepare("INSERT INTO users (mail, pass, first_name, last_name, phone_number, role_id, bus_id) VALUES (?,?,?,?,?,?,?)");
-        return $stmt->execute([
-            'mail' => $project->mail,
-            'pass' => $project->password,
-            'first_name' => $project->fname,
-            'last_name' => $project->lname,
-            'phone_number' => $project->phoneNumber,
-            'role_id' => $project->role,
-            'bus_id' => $project->bus,
-
-        ]);
+        $payload = [
+            $user->mail,
+            $user->pass,
+            $user->first_name,
+            $user->last_name,
+            $user->phone_number,
+            $user->role_id,
+            $user->bus_id
+        ];
+        return $stmt->execute($payload);
     }
 
     // Método para eliminar una tarea
-    public function deleteuser($id) {
+    public function deleteUser($id)
+    {
         $stmt = $this->db->prepare("DELETE FROM users WHERE id = ?");
         return $stmt->execute([$id]);
     }
 
     // Metodo para modificar una localizacion
-    public function updateUser($mail, $pass, $first_name, $last_name, $phone_number, $role_id, $bus_id, $id) {
-        $stmt = $this->db->prepare("UPDATE routes SET (mail, pass, first_name, last_name, phone_number, role_id, bus_id) VALUES (?,?,?,?,?,?,?) WHERE id =?");
-        return $stmt->execute([$mail, $pass, $first_name, $last_name, $phone_number, $role_id, $bus_id, $id]);
+    public function updateUser($user)
+    {
+        $stmt = $this->db->prepare("UPDATE users SET mail = ?, pass = ?, first_name = ?, last_name = ?, phone_number = ?, role_id = ?, bus_id = ? WHERE id = ?");
+        $payload = [
+            $user->mail,
+            $user->pass,
+            $user->first_name,
+            $user->last_name,
+            $user->phone_number,
+            $user->role_id,
+            $user->bus_id,
+            $user->id
+        ];
+        return $stmt->execute($payload);
+    }
+
+    public function getUserById($id)
+    {
+        $stmt = $this->db->prepare("SELECT * FROM users WHERE id = ?");
+        $stmt->execute([$id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 }

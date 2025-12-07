@@ -83,10 +83,53 @@ header h1 {
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
-.task-form input[type="text"], .task-form textarea {
+.task-form input[type="text"] {
     width: 50%;
     padding: 10px;
     margin-bottom: 10px;
+}
+
+.task-form input[type="email"], .task-form input[type="password"] {
+    width: 50%;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+/*Estilo para tabla*/
+.user-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    margin-bottom: 70px;
+    font-size: 0.9em;
+    min-width: 400px;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0,0,0,0.15);
+}
+
+.user-table thead tr {
+    background-color: #333;
+    color: #ffffff;
+    text-align: left;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.user-table th, .user-table td {
+    padding: 12px 15px;
+}
+
+.user-table tbody tr {
+    border-bottom: 1px solid #ddd;
+}
+
+.user-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.user-table tbody tr:last-of-type {
+    border-bottom: 2px solid #333;
 }
 
 /* Estilos del pie de página */

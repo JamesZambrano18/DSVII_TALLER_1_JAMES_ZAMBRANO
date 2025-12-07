@@ -8,9 +8,10 @@ error_reporting(E_ALL);
 define('BASE_PATH', __DIR__ . '/');
 
 // Include the configuration file
-require_once BASE_PATH . 'config.php';
+require_once '../../config.php';
 
 // Include necessary files
+require_once '../Database.php';
 require_once BASE_PATH . 'Users.php';
 require_once BASE_PATH . 'UsersManager.php';
 
@@ -26,25 +27,36 @@ switch ($action) {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $user = new Users($_POST);
             $usersManager->createUser($user);
-            header('Location: ' . BASE_URL. "/users");
+            header('Location: ' . BASE_URL . 'users');
             exit;
         }
-        require BASE_PATH . 'views/task_form.php'; //cambiar archivo
+        //require BASE_PATH . '/views/form.php';
+        require BASE_PATH . 'views/form.php';
         break;
     case 'delete':
-        $usersManager->deleteuser($_GET['id']);
-        header('Location: ' . BASE_URL);
+        $usersManager->deleteUser($_GET['id']);
+        header('Location: ' . BASE_URL . 'users');
         break;
     case 'update':
-        // $usersManager->updateUser($_POST['mail'], $_POST['password'], $_POST['fname']
-        //     , $_POST['lname'],$_POST['phoneNumber'], $_POST['role'],$_POST['bus'], $_GET['id']);
-        // header('Location: ' . BASE_URL);
+        //Obtener id y datos del usuario
+        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+            $id = $_GET['id'] ?? null;
+            $user = $usersManager->getUserById($id);
+            require BASE_PATH . 'views/edit.php';
+            break;
+        }
+
+        // Actualizar datos del usuario
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $user = new Users($_POST);
+            $usersManager->updateUser($user);
+            header('Location: ' . BASE_URL . 'users');
+            exit;
+        }
         break;
     default:
         $users = $usersManager->getAllUsers();
-        require BASE_PATH . 'views/task_list.php'; //cambiar archivo
+        require BASE_PATH . 'views/list.php';
         break;
 }
-
-echo "hello";
 ?>

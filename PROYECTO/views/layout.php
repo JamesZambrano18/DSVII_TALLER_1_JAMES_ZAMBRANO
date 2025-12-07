@@ -8,13 +8,13 @@
 </head>
 <body>
     <header>
-        <h1>ToDo List App</h1>
+        <!-- nav, cerrar sesion, info de usuario -->
     </header>
     <main>
         <?php echo $content; ?>
     </main>
     <footer>
-        <p>&copy; 2024 ToDo List App</p>
+        <p>&copy; 2025 Gestion de autobuses escolates</p>
     </footer>
     <script src="<?php echo BASE_URL; ?>/public/assets/js/main.js"></script>
 </body>
