@@ -12,7 +12,10 @@ class UsersManager
     // Método para obtener todas las tareas
     public function getAllUsers()
     {
-        $stmt = $this->db->query("SELECT * FROM users");
+        $stmt = $this->db->query("SELECT u.*, r.rol, b.bus_code
+        FROM users AS u
+        JOIN roles AS r ON u.role_id = r.id
+        LEFT JOIN busses AS b ON u.bus_id = b.id");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
@@ -60,6 +63,13 @@ class UsersManager
     {
         $stmt = $this->db->prepare("SELECT * FROM users WHERE id = ?");
         $stmt->execute([$id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function getBusCodes() {
+        $stmt = $this->db->query("SELECT u.bus_id, b.bus_code, b.id
+        FROM users AS u
+        JOIN busses AS b ON u.bus_id = b.id");
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 }

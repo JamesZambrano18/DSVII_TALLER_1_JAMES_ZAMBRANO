@@ -22,8 +22,8 @@ ob_start();
                     <td><?= htmlspecialchars($user['mail']) ?></td>
                     <td><?= htmlspecialchars($user['first_name'] ?? '' )?></td>
                     <td><?= htmlspecialchars($user['last_name'] ?? '' )?></td>
-                    <td><?= htmlspecialchars($user['role_id'] ?? '' )?></td>
-                    <td><?= htmlspecialchars($user['bus_id'] ?? '' )?></td>
+                    <td><?= htmlspecialchars($user['rol'] ?? '' )?></td>
+                    <td><?= htmlspecialchars($user['bus_code'] ?? '' )?></td>
                     <td><a href="<?= BASE_URL ?>users/update/<?= $user['id'] ?>" class="btn">✎</a></td>
                     <td><a href="<?= BASE_URL ?>users/delete/<?= $user['id'] ?>" class="btn" onclick="return confirm('¿Eliminar este usuario?')">🗑</a></td>
                 </tr>

@@ -30,7 +30,6 @@ switch ($action) {
             header('Location: ' . BASE_URL . 'users');
             exit;
         }
-        //require BASE_PATH . '/views/form.php';
         require BASE_PATH . 'views/form.php';
         break;
     case 'delete':

@@ -16,7 +16,14 @@ ob_start();
         <div>Telefono</div>
         <div><input type="text" name="phone_number" placeholder="9999-9999" required></div>
         <div>Rol</div>
-        <div><input type="text" name="role_id" required></div>
+        <div>
+            <select class="form-select" name="role_id" required>
+                <option value="" disabled selected>Seleccione un rol</option>
+                <option value="1">Estudiante</option>
+                <option value="2">Conductor</option>
+                <option value="3">Administrador</option>
+            </select>
+        </div>
         <div>Código de bus</div>
         <div><input type="text" name="bus_id" required></div>
         <button type="submit" class="btn">Crear usuario</button>
