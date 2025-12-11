@@ -1,6 +1,6 @@
-<?php 
+<?php
 // Iniciamos el buffer de salida
-ob_start(); 
+ob_start();
 ?>
 <div class="task-form">
     <h2>Editar informacion del usuario</h2>
@@ -14,12 +14,30 @@ ob_start();
         <div>Apellido</div>
         <div><input type="text" name="last_name" value="<?= htmlspecialchars($user['last_name']) ?>" required></div>
         <div>Telefono</div>
-        <div><input type="text" name="phone_number" value="<?= htmlspecialchars($user['phone_number']) ?>" required></div>
+        <div><input type="text" name="phone_number" value="<?= htmlspecialchars($user['phone_number']) ?>" required>
+        </div>
         <div>Rol</div>
-        <div><input type="text" name="role_id"  value="<?= htmlspecialchars($user['role_id']) ?>" required disabled></div>
-        <div><input type="hidden" name="role_id" value="<?= htmlspecialchars($user['role_id']) ?>" required></div>
+        <div>
+            <select name="role_id" class="form-select" required>
+                <option value="" disabled>Seleccione un bus</option>
+                <?php foreach ($rolesList as $role): ?>
+                    <option value="<?= $role['id'] ?>" <?= $role['id'] == $user['role_id'] ? 'selected' : '' ?>>
+                        <?= htmlspecialchars($role['rol']) ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        </div>
         <div>Código de bus</div>
-        <div><input type="text" name="bus_id" value="<?= htmlspecialchars($user['bus_id']) ?>" required></div>
+        <div>
+            <select name="bus_id" class="form-select" required>
+                <option value="" disabled>Seleccione un bus</option>
+                <?php foreach ($busList as $bus): ?>
+                    <option value="<?= $bus['id'] ?>" <?= $bus['id'] == $user['bus_id'] ? 'selected' : '' ?>>
+                        <?= htmlspecialchars($bus['bus_code']) ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        </div>
         <button type="submit" class="btn">Guardar cambios</button>
     </form>
     <br>

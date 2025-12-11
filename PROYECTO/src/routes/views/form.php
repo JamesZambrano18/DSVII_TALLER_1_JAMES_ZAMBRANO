@@ -1,16 +1,46 @@
-<?php 
+<?php
 // Iniciamos el buffer de salida
-ob_start(); 
+ob_start();
 ?>
 <div class="task-form">
     <h2>Agregar una nueva ruta</h2>
     <form action="../routes/create" method="post">
         <div>Código de bus</div>
-        <div><input type="text" name="bus_id" placeholder="código del bus" required></div>
+        <div>
+            <select name="bus_id" class="form-select" required>
+                <option value="" disabled selected>Seleccione un bus</option>
+                <?php foreach ($busList as $bus): ?>
+                    <option value="<?= $bus['id'] ?>"><?= htmlspecialchars($bus['bus_code']) ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
         <div>Salida</div>
-        <div><input type="text" name="departure_location" placeholder="sitio de partida" required></div>
+        <div>
+            <select name="departure_location" class="form-select" required>
+                <option value="" disabled selected>Seleccione un punto de salida</option>
+                <?php foreach ($locationList as $location): ?>
+                    <?php if($location['location_type_id'] == 1): ?>
+                    <option value="<?= $location['id'] ?>">
+                        <?= htmlspecialchars($location['district'] . ' - ' . $location['street']) ?>
+                    </option>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            </select>
+        </div>
+
         <div>Llegada</div>
-        <div><input type="text" name="arrival_location" placeholder="sitio de llegada" required></div>
+        <div>
+            <select name="arrival_location" class="form-select" required>
+                <option value="" disabled selected>Seleccione un punto de llegada</option>
+                <?php foreach ($locationList as $location): ?>
+                    <?php if($location['location_type_id'] == 2): ?>
+                    <option value="<?= $location['id'] ?>">
+                        <?= htmlspecialchars($location['district'] . ' - ' . $location['street']) ?>
+                    </option>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            </select>
+        </div>
         <button type="submit" class="btn">Agregar</button>
     </form>
     <br>

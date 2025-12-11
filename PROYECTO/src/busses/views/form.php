@@ -7,8 +7,15 @@ ob_start();
     <form action="../busses/create" method="post">
         <div>Código de bus</div>
         <div><input type="text" name="bus_code" placeholder="código del nuevo bus" required></div>
-        <div>Codigo de horario</div>
-        <div><input type="text" name="schedule_id" placeholder="código del horario del bus" required></div>
+        <div>Código de horario</div>
+        <div>
+            <select name="schedule_id" class="form-select" required>
+                <option value="" disabled>Seleccione un horario</option>
+                <?php foreach ($scheduleList as $schedule): ?>
+                    <option value="<?= $schedule['id'] ?>"><?= htmlspecialchars($schedule['schedule_code']) ?></option>   
+                <?php endforeach; ?>
+            </select>
+        </div>
         <button type="submit" class="btn">Agregar</button>
     </form>
     <br>

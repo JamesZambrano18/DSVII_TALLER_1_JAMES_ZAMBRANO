@@ -66,10 +66,15 @@ class UsersManager
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function getBusCodes() {
-        $stmt = $this->db->query("SELECT u.bus_id, b.bus_code, b.id
-        FROM users AS u
-        JOIN busses AS b ON u.bus_id = b.id");
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+    public function getAllBusses()
+    {
+        $stmt = $this->db->query("SELECT id, bus_code FROM busses");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getAllRoles()
+    {
+        $stmt = $this->db->query("SELECT id, rol FROM roles");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }

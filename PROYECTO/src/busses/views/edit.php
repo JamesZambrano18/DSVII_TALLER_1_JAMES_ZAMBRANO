@@ -9,7 +9,16 @@ ob_start();
         <div>Codigo de bus</div>
         <div><input type="text" name="bus_code" value="<?= htmlspecialchars($bus['bus_code']) ?>" required></div>
         <div>Codigo de horario</div>
-        <div><input type="text" name="schedule_id" value="<?= htmlspecialchars($bus['schedule_id']) ?>" required></div>
+        <div>
+            <select name="schedule_id" class="form-select" required>
+                <option value="" disabled>Seleccione un bus</option>
+                <?php foreach ($scheduleList as $schedule): ?>
+                    <option value="<?= $schedule['id'] ?>" <?= $schedule['id'] == $bus['schedule_id'] ? 'selected' : '' ?>>
+                        <?= htmlspecialchars($schedule['schedule_code']) ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        </div>
         <button type="submit" class="btn">Guardar cambios</button>
     </form>
     <br>

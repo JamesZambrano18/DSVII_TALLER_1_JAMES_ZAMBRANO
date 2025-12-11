@@ -42,6 +42,18 @@ class RoutesManager {
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+    public function getAllBusses()
+    {
+        $stmt = $this->db->query("SELECT id, bus_code FROM busses");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getAllLocations()
+    {
+        $stmt = $this->db->query("SELECT * FROM locations");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     // Metodo para modificar una localizacion
     public function updateRoute($route) {
         $stmt = $this->db->prepare("UPDATE routes SET bus_id=?, departure_location=?, arrival_location=? WHERE id =?");

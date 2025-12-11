@@ -25,7 +25,14 @@ ob_start();
             </select>
         </div>
         <div>Código de bus</div>
-        <div><input type="text" name="bus_id" required></div>
+        <div>
+            <select name="bus_id" class="form-select" required>
+                <option value="" disabled>Seleccione un bus</option>
+                <?php foreach ($busList as $bus): ?>
+                    <option value="<?= $bus['id'] ?>"><?= htmlspecialchars($bus['bus_code']) ?></option>   
+                <?php endforeach; ?>
+            </select>
+        </div>
         <button type="submit" class="btn">Crear usuario</button>
     </form>
     <br>

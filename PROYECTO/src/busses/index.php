@@ -29,6 +29,7 @@ switch ($action) {
             header('Location: ' . BASE_URL. "busses");
             exit;
         }
+        $scheduleList = $bussesManager->getAllSchedules();
         require BASE_PATH . 'views/form.php'; //cambiar archivo
         break;
     case 'delete':
@@ -40,6 +41,7 @@ switch ($action) {
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             $id = $_GET['id'] ?? null;
             $bus = $bussesManager->getBusById($id);
+            $scheduleList = $bussesManager->getAllSchedules();
             require BASE_PATH . 'views/edit.php';
             break;
         }

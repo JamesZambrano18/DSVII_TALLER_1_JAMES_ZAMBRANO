@@ -30,6 +30,7 @@ switch ($action) {
             header('Location: ' . BASE_URL . 'users');
             exit;
         }
+        $busList = $usersManager->getAllBusses();
         require BASE_PATH . 'views/form.php';
         break;
     case 'delete':
@@ -41,6 +42,8 @@ switch ($action) {
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             $id = $_GET['id'] ?? null;
             $user = $usersManager->getUserById($id);
+            $busList = $usersManager->getAllBusses();
+            $rolesList = $usersManager->getAllRoles();
             require BASE_PATH . 'views/edit.php';
             break;
         }

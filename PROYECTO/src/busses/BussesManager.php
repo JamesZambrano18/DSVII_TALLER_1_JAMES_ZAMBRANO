@@ -38,6 +38,12 @@ class BussesManager {
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+    public function getAllSchedules()
+    {
+        $stmt = $this->db->query("SELECT id, schedule_code FROM schedules");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     //Metodo para actualizar info de bus
     public function updateBus($bus) {
         $stmt = $this->db->prepare("UPDATE busses SET bus_code=?, schedule_id=? WHERE id =?");

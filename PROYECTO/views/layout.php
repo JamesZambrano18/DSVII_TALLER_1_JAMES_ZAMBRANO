@@ -15,7 +15,6 @@
                 <li><a href="<?php echo BASE_URL; ?>locations">Gestionar localizaciones</a></li>
                 <li><a href="<?php echo BASE_URL; ?>schedules">Gestionar horarios</a></li>
                 <li><a href="<?php echo BASE_URL; ?>busses">Gestionar buses</a></li>
-                <li><a href="#">Seguimiento de pagos</a></li>
                 <li><a href="#">Cerrar Sesion</a></li>
             </ul>
         </nav>

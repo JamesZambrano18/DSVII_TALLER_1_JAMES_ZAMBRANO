@@ -29,6 +29,8 @@ switch ($action) {
             header('Location: ' . BASE_URL. "routes");
             exit;
         }
+        $busList = $routesManager->getAllBusses();
+        $locationList = $routesManager->getAllLocations();
         require BASE_PATH . 'views/form.php'; 
         break;
     case 'delete':
@@ -40,6 +42,8 @@ switch ($action) {
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             $id = $_GET['id'] ?? null;
             $route = $routesManager->getRouteById($id);
+            $busList = $routesManager->getAllBusses();
+            $locationList = $routesManager->getAllLocations();
             require BASE_PATH . 'views/edit.php';
             break;
         }
